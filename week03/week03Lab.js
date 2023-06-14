@@ -31,7 +31,7 @@
 console.log(`--------------------------
 Question 1: alphabetString \n`);
 
-let alphabetString = 'abcdefghijklmnopqrstuvwxyz'; 
+let alphabetString = 'abcdefghijklmnopqrstuvwxyz';
 
 /*
  * Using the provided code above:
@@ -165,10 +165,10 @@ Question 6: addingMachine \n`);
  * ↓ YOUR CODE HERE ↓ */
 
 function addingMachine(x) {
-       let sum = 0; 
+       let sum = 0;
        for (let i = 0; i <= x.length - 1; i++) {
-               sum += x[i];
-        }
+              sum += x[i];
+       }
        return sum;
 }
 
@@ -203,7 +203,7 @@ Question 7: reverse \n`);
 function reverse(x) {
        console.log("The input type is: " + typeof x)
        switch (typeof x) {
-               case "number":
+              case "number":
                      x = x.toString(); // convert number to a string
                      // console.log("toString: " + x);
                      x = x.split('');  // convert to an array
@@ -248,7 +248,7 @@ console.log(reverse(123456n));      //should return false
 // Question 8: removeElements 
 console.log(`--------------------------
 Question 8: removeElements \n`);
-    
+
 /*
  * Step 1:  Create a function called removeElements - the purpose of this function is to remove all elements from an array
         * This function will have one parameter (array)
@@ -302,7 +302,6 @@ function whichArrayIsLonger(array1, array2) {
               return false;
        }
 }
-
 
 /* ↑ YOUR CODE HERE ↑ */
 
