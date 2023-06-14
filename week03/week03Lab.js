@@ -41,9 +41,8 @@ let alphabetString = 'abcdefghijklmnopqrstuvwxyz';
  * ↓ YOUR CODE HERE ↓ */
 
 
-
-
-
+let alphabetToArray = alphabetString.split("");
+console.log(alphabetToArray);
 
 // Question 2: alphabetArray
 console.log(`--------------------------
@@ -59,10 +58,8 @@ let alphabetArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
  * 
  * ↓ YOUR CODE HERE ↓ */
 
-
-
-
-
+alphabetArray.reverse();              // reverse array
+console.log(alphabetArray.join(''))   // returns string without , and space
 
 // Question 3: array1
 console.log(`--------------------------
@@ -82,10 +79,18 @@ let array1 = [1, 5, 6, 9, 10, 14];
  * 
  * ↓ YOUR CODE HERE ↓ */
 
+console.log(array1)
 
+console.log(array1[2])
 
+console.log(array1[array1.length - 1])
 
+array1.push(16, 3);
+console.log(array1)
 
+console.log(array1[2])
+
+console.log(array1[array1.length - 1])
 
 // Question 4: Todo List
 console.log(`--------------------------
@@ -102,11 +107,20 @@ Question 4: Todo List \n`);
  * 
  * ↓ YOUR CODE HERE ↓ */
 
+const myToDoList = [];
 
+myToDoList.push("wash dishes", "clean sink", "disinfect counter");
+console.log("After creation: " + myToDoList);
 
+myToDoList.splice(1, 1)
+console.log("After removal: " + myToDoList);
 
+const yourToDoList = [];
+yourToDoList.push("buy groceries", "wash laundry");
+console.log("Your todo list: " + yourToDoList);
 
-
+const ourToDoList = myToDoList.concat(yourToDoList);
+console.log("Our todo list: " + ourToDoList);
 
 // Question 5: isEven 
 console.log(`--------------------------
@@ -123,19 +137,17 @@ Question 5: isEven  \n`);
  * 
  * ↓ YOUR CODE HERE ↓ */
 
-
-
-
+function isEven(x) {
+       return x % 2 === 0;
+}
 
 /* ↑ YOUR CODE HERE ↑ */
 
 //! Sample test cases for the above isEven function (uncomment to test)
-//console.log(isEven(2));   //should return true
-//console.log(isEven(3));   //should return false
-//console.log(isEven(4));   //should return true
-//console.log(isEven(5));   //should return false
-
-
+console.log(isEven(2));   //should return true
+console.log(isEven(3));   //should return false
+console.log(isEven(4));   //should return true
+console.log(isEven(5));   //should return false
 
 
 // Question 6: addingMachine
@@ -152,18 +164,20 @@ Question 6: addingMachine \n`);
  * 
  * ↓ YOUR CODE HERE ↓ */
 
-
-
-
+function addingMachine(x) {
+       let sum = 0; 
+       for (let i = 0; i <= x.length - 1; i++) {
+               sum += x[i];
+        }
+       return sum;
+}
 
 /* ↑ YOUR CODE HERE ↑ */
 
 //! Sample test cases for the above isEven function (uncomment to test)
-//console.log(addingMachine([1, 2, 3, 4, 5]));                    //should return 15
-//console.log(addingMachine([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));    //should return 55
-//console.log(addingMachine([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])); //should return 120
-
-
+console.log(addingMachine([1, 2, 3, 4, 5]));                    //should return 15
+console.log(addingMachine([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));    //should return 55
+console.log(addingMachine([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])); //should return 120
 
 // Question 7: reverse 
 console.log(`--------------------------
@@ -180,25 +194,56 @@ Question 7: reverse \n`);
         * If it's not a boolean, number, string, or array, return false
         * Hint - use the typeof operator to determine the type of the parameter
         * (See documentation: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray)
- * Step 2: Uncomment the arguments (test cases) given below 
+
+* Step 2: Uncomment the arguments (test cases) given below 
  * 
  * 
  * ↓ YOUR CODE HERE ↓ */
 
-
-
-
+function reverse(x) {
+       console.log("The input type is: " + typeof x)
+       switch (typeof x) {
+               case "number":
+                     x = x.toString(); // convert number to a string
+                     // console.log("toString: " + x);
+                     x = x.split('');  // convert to an array
+                     // console.log("split: " + x);
+                     x = x.reverse();  // use reverse method t reverse the array
+                     // console.log("reverse: " + x);
+                     x = x.join('');   // returns new string by combining values in the array - empty string separatot gets rid of the space 
+                     // console.log("join: " + x);
+                     x = parseInt(x)  // converts string to an integer
+                     return x;
+                     break;
+              case "string":
+                     x = x.split('');  // converts string to an array
+                     x = x.reverse();  // use reverse method t reverse the array
+                     x = x.join('');   // returns new string by combining values in the array - empty string separator gets rid of the space 
+                     //  Instructor solution - you can combine all the methods in one line: return x.toString().split('').reverse().join(''); 
+                     return x;
+                     break;
+              case "boolean":
+                     return !x;
+                     break;
+              case "object":
+                     if (Array.isArray(x)) {
+                            return x.reverse();  // use reverse method to reverse the array
+                     }
+                     break;
+              default:
+                     return false;
+       }
+}
 
 /* ↑ YOUR CODE HERE ↑ */
 
 // Sample test cases for the above reverse function (uncomment to test)
-//console.log(reverse(1234));         //should return 4321
-//console.log(reverse('hello'));      //should return 'olleh'
-//console.log(reverse(true));         //should return false
-//console.log(reverse([1, 2, 3, 4])); //should return [4, 3, 2, 1]
-
-
-
+console.log(reverse(1234));         //should return 4321
+console.log(reverse('hello'));      //should return 'olleh'
+console.log(reverse(true));         //should return false
+console.log(reverse(false));        //should return true
+console.log(reverse([1, 2, 3, 4])); //should return [4, 3, 2, 1]
+console.log(reverse(123456n));      //should return false
 
 // Question 8: removeElements 
 console.log(`--------------------------
@@ -218,16 +263,18 @@ Question 8: removeElements \n`);
  * 
  * ↓ YOUR CODE HERE ↓ */
 
-
-
-
+function removeElements(array) {
+       while (array.length > 0) {
+              console.log(array.pop()) // remove element at the end of the array
+              console.log("After pop: " + array);
+       }
+       return array;
+}
 
 /* ↑ YOUR CODE HERE ↑ */
 
 // Sample test cases for the above removeElements function (uncomment to test)
-//console.log(removeElements([1, 2, 3, 4, 5])); //should return [] (an empty array)
-
-
+console.log(removeElements([1, 2, 3, 4, 5])); //should return [] (an empty array)
 
 // Question 9: whichArrayIsLonger 
 console.log(`--------------------------
@@ -246,12 +293,20 @@ Question 9: whichArrayIsLonger  \n`);
  * ↓ YOUR CODE HERE ↓ */
 
 
-
+function whichArrayIsLonger(array1, array2) {
+       if (array1.length > array2.length) {
+              return array1;
+       } else if (array2.length > array1.length) {
+              return array2;
+       } else {
+              return false;
+       }
+}
 
 
 /* ↑ YOUR CODE HERE ↑ */
 
 // Sample test cases for the above whichArrayIsLonger function (uncomment to test)
-//console.log(whichArrayIsLonger([1, 2, 3, 4, 5], [1, 2, 3, 4]));    //should return [1, 2, 3, 4, 5]
-//console.log(whichArrayIsLonger([1, 2, 3, 4], [1, 2, 3, 4, 5, 6])); ///should return [1, 2, 3, 4, 5, 6]
-//console.log(whichArrayIsLonger([1, 2, 3, 4], [1, 2, 3, 4]));       //should return false (because they are the same length)
+console.log(whichArrayIsLonger([1, 2, 3, 4, 5], [1, 2, 3, 4]));    //should return [1, 2, 3, 4, 5]
+console.log(whichArrayIsLonger([1, 2, 3, 4], [1, 2, 3, 4, 5, 6])); ///should return [1, 2, 3, 4, 5, 6]
+console.log(whichArrayIsLonger([1, 2, 3, 4], [1, 2, 3, 4]));       //should return false (because they are the same length)
