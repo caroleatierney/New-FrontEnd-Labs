@@ -101,16 +101,17 @@ Question 3: Arrow Functions`)
  * ↓ YOUR CODE HERE ↓ */
 
 const lunchTime = (foodChoice, drinkChoice) => {
-   console.log(`For ${myName} and ${friendsName}'s lunch, the drink will be a ${drinkChoice} and the main course will be a ${foodChoice}!`);
+   return(`For ${myName} and ${friendsName}'s lunch, the drink will be a ${drinkChoice} and the main course will be a ${foodChoice}!`);
 }
-lunchTime('Pizza', 'Water');
+console.log(lunchTime('Pizza', 'Water'));
 
 //Question: What would your function look like if we were using the old way of creating a function?
 //Answer:
-function lunchTime1(foodChoice, drinkChoice) {
+function lunchTimeOld(foodChoice, drinkChoice) {
    console.log(`The drink will be ${ drinkChoice } and the main course will be a ${ foodChoice}!`);
 }
-lunchTime("Hamburger", "Beer")
+lunchTimeOld("Hamburger", "Beer");
+
 
 /*---------------------------------- Callbacks -------------------------------------*/
 console.log(`-------------------------- 
@@ -129,6 +130,6 @@ Question 4: Callbacks`)
 const foodForTodayAndTomorrow = (tomorrowsFoodChoice, tomorrowsDrinkChoice, callBackFunction) => {
    return `${callBackFunction} Tomorrow we want ${tomorrowsFoodChoice} and ${tomorrowsDrinkChoice}.`;
 }
-console.log(foodForTodayAndTomorrow('Pizza', 'Water', lunchTime("PB&J", "Iced Tea")));
+console.log(foodForTodayAndTomorrow('Pizza', 'Water', lunchTime('PB&J', 'Iced Tea')));
 
 console.log(`-----------Finished------------`)
