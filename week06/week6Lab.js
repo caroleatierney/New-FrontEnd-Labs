@@ -68,16 +68,20 @@ console.log('Example Question: Add two numbers')
 function addTwoNumbers(num1, num2) {
   return `num1 + num2 is: ${num1 + num2}`
 }
-
 console.log(addTwoNumbers(2, 3)) // logs 5
+
+
 /* -- STEP 2: CREATE A TEST IN tests.js -- */
 /*--------------------------------------------------------------------*/
 console.log(`1a: Sorted array of numbers:`)
 
-// const arrayOfNumbers = [1, 5, 3, 2, 4]
-// arrayOfNumbers = arrayOfNumbers.sort((a, b) => a - b)
+var arrayOfNumbers = [1, 5, 3, 2, 4]
+arrayOfNumbers = arrayOfNumbers.sort((a, b) => a - b)
 
-// console.log(arrayOfNumbers)
+console.log(arrayOfNumbers)
+
+
+
 /*----------------------------------------------------*/
 console.log(`1b: Manage my wallet `)
 
@@ -100,6 +104,30 @@ console.log(`1b: Manage my wallet `)
 // myWallet.addMoney(3)
 
 // console.log(myWallet.money)
+
+
+// AFTER DEBUGGING:
+
+class Wallet {
+  constructor(startingMoney) {
+    this.money = startingMoney
+  }
+
+  addMoney(amount) {
+    return this.money += amount
+  }
+
+  removeMoney(amount) {
+    return this.money -= amount
+  }
+}
+
+const myWallet = new Wallet(100)
+myWallet.removeMoney(14.99)
+myWallet.addMoney(3)
+
+console.log(myWallet.money)
+
 /*----------------------------------------------------*/
 console.log(`1c: Day of the Week`)
 //In some cases, there's no error, but you're not getting your expected result back.
@@ -127,37 +155,87 @@ console.log(`1c: Day of the Week`)
 // }
 
 // console.log(dayOfTheWeek(5)) // should log Friday
+
+// AFTER DEBUGGING:
+const dayOfTheWeek = (num) => {
+  switch (num) {
+    case 1:
+      return 'Monday'
+      break;
+    case 2:
+      return 'Tuesday'
+      break;
+    case 3:
+      return 'Wednesday'
+      break;
+    case 4:
+      return 'Thursday'
+      break;
+    case 5:
+      return 'Friday'
+      break;
+    case 6:
+      return 'Saturday'
+      break;
+    case 7:
+      return 'Sunday'
+      break;
+    default:
+      console.log('Err. Something went wrong.')
+  }
+}
+console.log("Day of week: " + dayOfTheWeek(5)) // should log Friday
+
 /*----------------------------------------------------*/
 console.log(`1d: Only wizards shall pass!`)
 
-// const movieCharacters = [
-//   {
-//     name: 'Howl',
-//     isAWizard: true,
-//     quote: `You're wearing that hat? After all the magic I used to make your dress pretty?`,
-//   },
-//   {
-//     name: 'Kalcifer',
-//     isAWizard: false,
-//     quote: `I don't cook! I'm a scary and powerful fire demon!`,
-//   },
-//   {
-//     name: 'Gandalf',
-//     isAWizard: true,
-//     quote: `You shall not pass!`,
-//   },
-//   {
-//     name: 'Luke Skywalker',
-//     isAWizard: false,
-//     quote: `May the Force be with you.`,
-//   },
-// ]
+const movieCharacters = [
+  {
+    name: 'Howl',
+    isAWizard: true,
+    quote: `You're wearing that hat? After all the magic I used to make your dress pretty?`,
+  },
+  {
+    name: 'Kalcifer',
+    isAWizard: false,
+    quote: `I don't cook! I'm a scary and powerful fire demon!`,
+  },
+  {
+    name: 'Gandalf',
+    isAWizard: true,
+    quote: `You shall not pass!`,
+  },
+  {
+    name: 'Luke Skywalker',
+    isAWizard: false,
+    quote: `May the Force be with you.`,
+  },
+]
 
-// function onlyWizards(arrayOfCharacters) {
-//   return arrayOfCharacters.filter((character) => character == true)
-// }
+function onlyWizards(arrayOfCharacters) {
+  return arrayOfCharacters.filter((movieCharacter) => movieCharacter.isAWizard == true)
+}
+
+console.log("Wizard list: " + onlyWizards(movieCharacters)[0].name);
+console.log("Wizard list: " + onlyWizards(movieCharacters)[1].name);
 
 // //check out the console.table() method you can use on objects!
 // console.table(onlyWizards(movieCharacters)) //expecting an array of characters whose key/value pair is = isAWizard: true
 /*----------------------------------------------------*/
 console.log(`-----------Finished------------`)
+
+
+// Here is an alternative and non order dependent approach for collections:
+
+// array
+// expect([1, 2, 3]).to.include.members([3, 2, 1])
+// You can also use this with a deep flag for comparison of objects:
+
+// array of objects
+// expect([{ id: 1 }]).to.deep.include.members([{ id: 1 }]);
+
+// object
+// expect({ foo: 'bar', width: 190, height: 90 }).to.include({ height: 90, width: 190 })
+
+
+
