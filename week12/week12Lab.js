@@ -76,6 +76,9 @@ Part 1: Setup your JSON server`)
  *
  * ↓ YOUR CODE HERE ↓ */
 
+const URL_ENDPOINT = "http://localhost:3000/studentRoster"
+
+
 /*------------------------ Part 2: HTTP Verb: GET ------------------------*/
 console.log(
   `-------------------------- 
@@ -91,6 +94,25 @@ Part 2: GET and displaying the information`
  *         Reminder: While you are not required to, the lab solution uses a <table>
  *
  * ↓ YOUR CODE HERE ↓ */
+
+// $.get(URL_ENDPOINT).then(data => console.log(data))
+
+$.get(URL_ENDPOINT).then(data => {
+  data.map(student => {
+    $('tbody').append(
+      $(`
+        <tr>
+          <td>${student.id}</td>
+          <td>${student.fullName}</td>
+          <td>${student.researchAssignment}</td>
+          <td>
+            <button onclick="deleteUser(${student.id})">🗑</button>
+          </td>
+        </tr>
+      `)
+    )
+  })
+})
 
 /*------------------------ Part 3: HTTP Verb: POST ------------------------*/
 console.log(
@@ -116,6 +138,17 @@ Part 3: POST and adding new students`
  *         Your button should now post a new user on click.
  *
  * ↓ YOUR CODE HERE ↓ */
+
+// $('#submitStudent').click(function (e) {
+  // e.preventDefault()
+  // console.log("Please Work")
+$('#submitStudent').click(function () {
+
+  $.post(URL_ENDPOINT, {
+    fullName: $('#fullName').val() ,
+    researchAssignment: $('#newAssignment').val(),
+  })
+})
 
 /*------------------------ Part 4: HTTP Verb: DELETE ------------------------*/
 console.log(
@@ -150,6 +183,13 @@ Part 4: DELETE and deleting individual students`
  *
  * ↓ YOUR CODE HERE ↓ */
 
+function deleteUser(id) {
+
+  $.ajax(`${URL_ENDPOINT}/${id}`, { 
+    type: 'DELETE'
+  });
+}
+
 /*------------------------ HTTP Verb: UPDATE ------------------------*/
 console.log(
   `-------------------------- 
@@ -175,6 +215,21 @@ Part 4: PUT and updating the information`
  * ↓ YOUR CODE HERE ↓ */
 
 console.log(`-----------Finished------------`)
+
+function updateStudent() {
+let id = $('#updateId').val();
+
+  $.ajax(`${URL_ENDPOINT}/${id}`, {
+    method: 'PUT',
+    data: {
+      fullName: $('#updateFullName').val(),
+      assignment: $('#updateAssignment').val(),
+    }
+  });
+}
+
+$('#updateStudent').click(updateStudent)
+
 
 /*------------------------ Optional: Style it with bootstrap! ------------------------*/
 
