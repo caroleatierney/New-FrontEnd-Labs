@@ -34,5 +34,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "*         .map hint: {this.customersArray.map((customer, index) => (  *                    //return your elements here  *                    //Each <tr> will also need a key prop with a unique value.  *                    ))}",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
