@@ -4,6 +4,10 @@
 #   Subject:  React Week 15 - REST, Fetch, Functional Components, and Best Practices
 #   JS/React Lab Week 15 */
 
+https://mockoon.com/tutorials/getting-started/
+Data storage: macOS: ~/Library/Application Support/mockoon/storage
+curl -X POST HTTP://localhost:3000/users  
+
 <!-- 
 
 In-depth/step by step instruction for Week 15 lab.

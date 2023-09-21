@@ -1,9 +1,7 @@
-/* 
-  Copyright (c) 2023 Promineo Tech
-  Author:  Promineo Tech Academic Team
-  Subject:  React Week 15 - REST, Fetch, Functional Components, and Best Practices
-  FE Lab Week 15
-*/
+/* Copyright (c) 2023 Promineo Tech
+   Author:  Promineo Tech Academic Team
+   Subject:  React Week 15 - REST, Fetch, Functional Components, and Best Practices
+   JS/React Lab Solution Week 15 */
 
 /* ----------------------------------------------------- */
 // Key Term List:
@@ -177,20 +175,130 @@
  *
  * Optional: Set the input values in your update form to be equal to user.name/user.jobTitle etc,
  *           so they don't initially submit empty strings.
- *
  */
 
 /*-- ALL IMPORTS HERE -- */
 import './App.css'
-
+import { useEffect, useState } from 'react'
 function App() {
   /* -- YOUR CODE/CRUD OPERATIONS HERE --*/
+  const API_URL = 'https://650b5132dfd73d1fab09e2da.mockapi.io/Week15Lab/users'
+  const [users, setUsers] = useState([])
+
+  const [newUserName, setNewUserName] = useState('')
+  const [newUserJobTitle, setNewUserJobTitle] = useState('')
+  const [newUserCompanyName, setNewUserCompanyName] = useState('')
+
+  const [updatedUserName, setUpdatedUserName] = useState('')
+  const [updatedJobTitle, setUpdatedJobTitle] = useState('')
+  const [updatedCompanyName, setUpdatedCompanyName] = useState('')
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
+  function getUsers() {
+    fetch(API_URL)
+      .then((data) => data.json())
+      .then((data) => {
+        setUsers(data)
+        console.log(data)
+      })
+  }
+
+  function deleteUser(id) {
+    fetch(API_URL + `/${id}`, {
+      method: 'DELETE',
+    }).then(() => getUsers())
+  }
+
+  function postNewUser(e) {
+    e.preventDefault()
+    fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: newUserName,
+        jobTitle: newUserJobTitle,
+        companyName: newUserCompanyName,
+      }),
+    }).then(() => getUsers())
+  }
+
+  function updateUser(e, userObject) {
+    e.preventDefault()
+    // let updatedUserObject = userObject
+
+    // updatedUserObject.name = updatedUserName
+    // updatedUserObject.jobTitle = updatedJobTitle
+    // updatedUserObject.companyName = updatedCompanyName
+
+    // This is a more condensed way of the above.
+    // Use the spread operator to spread out userObject,
+    // then update the key:value pairs
+
+    let updatedUserObject = {
+      ...userObject,
+      name: updatedUserName,
+      jobTitle: updatedJobTitle,
+      companyName: updatedCompanyName,
+    }
+
+    fetch(`${API_URL}/${userObject.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedUserObject),
+    }).then(() => getUsers())
+  }
 
   return (
     <div className="App">
       {/* CODE BELOW: PART: 5.3 Connecting our POST */}
+      <form>
+        <h3>POST new user form</h3>
+        <label>Name</label>
+        <input onChange={(e) => setNewUserName(e.target.value)}></input><br></br>
+        <label>Job Title</label>
+        <input onChange={(e) => setNewUserJobTitle(e.target.value)}></input><br></br>
+        <label>Company Name</label>
+        <input onChange={(e) => setNewUserCompanyName(e.target.value)}></input><br></br>
+        <button onClick={(e) => postNewUser(e)}>Submit</button>
+      </form>
+      <br></br>
 
       {/* CODE BELOW: PART 5.1: Connecting our GET  //  PART 5.4: Connecting our UPDATE */}
+      {users.map((user, index) => (
+        <div className="mapContainer" key={index}>
+          <div>
+            Name: {user.name} <br></br>
+            Job Title: {user.jobTitle} <br></br>
+            Company Name: {user.companyName} <br></br>
+            <button onClick={() => deleteUser(user.id)}>🗑</button>
+          </div>
+          <form>
+            <label>Update Name</label>
+            <input
+              onChange={(e) => setUpdatedUserName(e.target.value)}
+            ></input>
+            <br></br>
+            <label>Update Job Title</label>
+            <input
+              onChange={(e) => setUpdatedJobTitle(e.target.value)}
+            ></input>
+            <br></br>
+            <label>Update Company Name</label>
+            <input
+              onChange={(e) => setUpdatedCompanyName(e.target.value)}
+            ></input>
+            <br></br>
+            <button onClick={(e) => updateUser(e, user)}>Update</button>
+          </form>
+        </div>
+      ))}
     </div>
   )
 }
